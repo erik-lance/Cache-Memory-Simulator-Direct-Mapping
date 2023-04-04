@@ -11,9 +11,8 @@ function submit() {
     let input = $('#inputSeqValues').val();
     let inputProcessed;
     let passes;
-    let mDropdown = document.querySelector('#mmSizeDropdown');
-    let cDropdown = document.querySelector('#cmSizeDropdown');
-    let [mmSelectedOption, cmSelectedOption] = [mDropdown.value, cDropdown.value];
+    let [mDropdown, cDropdown] = [$('#mmSizeDropdown'), $('#cmSizeDropdown')];
+    let [mmSelectedOption, cmSelectedOption] = [mDropdown.val(), cDropdown.val()];
     let [mmSizeType, cmSizeType] = [];
 
     //Process Data
@@ -24,7 +23,7 @@ function submit() {
     let [hit, miss] = [0, 0];
     let cache;
     let [averageAccessTime, totalAccessTime] = [];
-    
+
     fetchValidateData();
     if (MappingMode == 'Blocks' && validInput == true) {
         inputProcessed = input.split(',');
@@ -55,9 +54,9 @@ function submit() {
     //This function assigns the size type of the memory and cache to a letiable
     //This also calculates the number of bits needed for the Main Memory, tag, block, and word
     function fetchValidateData() {
-        blockSize = document.getElementById('blockSize').value;
-        mmSize = document.getElementById('mmSizeValue').value;
-        cmSize = document.getElementById('cmSizeValue').value;
+        blockSize = $('#blockSize').val();
+        [mmSize, cmSize] = [$('#mmSizeValue').val(), $('#cmSizeValue').val()];
+
         //Converts the Block Size to the number of bits and checks if it is a power of 2
         if (blockSize > 0) {
             wordBits = getBits(blockSize);
@@ -235,26 +234,32 @@ function submit() {
     }
 
     function printLogValues() {
-        console.log('mmSizeType: ' + mmSizeType);
-        console.log('cmSizeType: ' + cmSizeType);
-        console.log('blockSize: ' + blockSize);
-        console.log('mmSize: ' + mmSize);
-        console.log('cmSize: ' + cmSize);
-        console.log('mmBits: ' + mmBits);
-        console.log('tagBits: ' + tagBits);
-        console.log('blockBits: ' + blockBits);
-        console.log('wordBits: ' + wordBits);
-        console.log('missPenalty: ' + missPenalty);
-        console.log('inputSequence: ' + inputSequence);
-        console.log('input: ' + input);
+        console.log(`%c mmSizeType: %c${mmSizeType}`, "color: white", "color: white");
+        console.log(`%c cmSizeType: %c${cmSizeType}`, "color: white", "color: white");
+
+        console.log(`%c blockSize: %c${blockSize}`, "color: magenta", "color: white");
+        console.log(`%c mmSize: %c${mmSize}`, "color: magenta", "color: white");
+        console.log(`%c cmSize: %c${cmSize}`, "color: magenta", "color: white");
+        console.log(`%c mmBits: %c${mmBits}`, "color: magenta", "color: white");
+
+        console.log(`%c tagBits: %c${tagBits}`, "color: yellow", "color: white");
+        console.log(`%c blockBits: %c${blockBits}`, "color: yellow", "color: white");
+        console.log(`%c wordBits: %c${wordBits}`, "color: yellow", "color: white");
+
+        console.log(`%c missPenalty: %c${missPenalty}`, "color: red", "color: white");
+        console.log(`%c inputSequence: %c${inputSequence}`, "color: white", "color: white");
+        console.log(`%c input: %c${input}`, "color: white", "color: white");
+
         //console log for testing with text to identify which value is which starting from SizeType
-        console.log('passes: ' + passes);
-        console.log('hit: ' + hit);
-        console.log('miss: ' + miss);
-        console.log('averageAccessTime: ' + averageAccessTime);
-        console.log('totalAccessTime: ' + totalAccessTime);
+        console.log(`%c passes: %c${passes}`, "color: white", "color: white");
+        console.log(`%c hit: %c${hit}`, "color: green", "color: white");
+        console.log(`%c miss: %c${miss}`, "color: red", "color: white");
         
+        console.log(`%c averageAccessTime: %c${averageAccessTime}`, "color: cyan", "color: white");
+        console.log(`%c totalAccessTime: %c${totalAccessTime}`, "color: cyan", "color: white");
+
         //console log cache in a 2D array as a table
         console.table(cache);
     }
+
 }
