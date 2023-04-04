@@ -160,24 +160,7 @@ function submit() {
             console.log('cache: ' + cache[i][cache[i][0]]);
         }
     }
-    //function to get the number of bits needed for the input and check if it is a power of 2
-    //if it is a power of 2, return the number of bits needed
-    //else return -1
-    function getBits(num) {
-        if (num == 0) {
-            return -1;
-        }
-        let n = 0;
-        while (num > 1) {
-            if (num % 2 == 0) {
-                num = num / 2;
-                n++;
-            } else {
-                return -1;
-            }
-        }
-        return n;
-    }
+    
     //function to convert a range input to a sequence of MM blocks
     function rangeInputSequence() {
         startingBlock = 0;
@@ -274,4 +257,24 @@ function submit() {
         console.table(cache);
     }
 
+}
+
+
+//function to get the number of bits needed for the input and check if it is a power of 2
+//if it is a power of 2, return the number of bits needed
+//else return -1
+function getBits(num) {
+    if (num == 0) {
+        return -1;
+    }
+    let n = 0;
+    while (num > 1) {
+        if (num % 2 == 0) {
+            num = num / 2;
+            n++;
+        } else {
+            return -1;
+        }
+    }
+    return n;
 }
