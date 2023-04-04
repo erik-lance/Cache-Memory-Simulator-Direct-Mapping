@@ -1,35 +1,33 @@
 function submit() {
     //clear console log
     console.clear();
-    var validInput = true;
-    var MappingMode = document.querySelector('#inputSeqDropdown').value;
-    var blockSize;
-    var mmSize;
-    var cmSize;
-    var mainAT;
-    var cacheAT;
+    let validInput = true;
+    let MappingMode = $('#inputSeqDropdown').val();
+    let blockSize;
+    let [mmSize, cmSize] = [];
+    let [mainAT, cacheAT] = [];
+
     //get inputSeq and store in input then split into an array by comma
-    var input = document.getElementById('inputSeqValues').value;
-    var inputProcessed;
-    var passes;
-    var mDropdown = document.querySelector('#mmSizeDropdown');
-    var cDropdown = document.querySelector('#cmSizeDropdown');
-    var mmSelectedOption = mDropdown.value;
-    var cmSelectedOption = cDropdown.value;
-    var mmSizeType;
-    var cmSizeType;
+    let input = $('#inputSeqValues').val();
+    let inputProcessed;
+    let passes;
+    let mDropdown = document.querySelector('#mmSizeDropdown');
+    let cDropdown = document.querySelector('#cmSizeDropdown');
+    let [mmSelectedOption, cmSelectedOption] = [mDropdown.value, cDropdown.value];
+    let [mmSizeType, cmSizeType] = [];
+
     //Process Data
-    var mmBits;
-    var blockBits;
-    var wordBits;
-    var tagBits;
-    var missPenalty;
-    var inputSequence;
-    var hit = 0;
-    var miss = 0;
-    var cache;
-    var averageAccessTime;
-    var totalAccessTime;
+    let mmBits;
+    let blockBits;
+    let wordBits;
+    let tagBits;
+    let missPenalty;
+    let inputSequence;
+    let hit = 0;
+    let miss = 0;
+    let cache;
+    let averageAccessTime;
+    let totalAccessTime;
     fetchValidateData();
     if (MappingMode == 'Blocks' && validInput == true) {
         inputProcessed = input.split(',');
@@ -76,7 +74,7 @@ function submit() {
         console.table(cache);
     }
 
-    //This function assigns the size type of the memory and cache to a variable
+    //This function assigns the size type of the memory and cache to a letiable
     //This also calculates the number of bits needed for the Main Memory, tag, block, and word
     function fetchValidateData() {
         blockSize = document.getElementById('blockSize').value;
@@ -169,7 +167,7 @@ function submit() {
     }
     //function to print the last values of each cache block
     function printCache() {
-        for (var i = 0; i < cache.length; i++) {
+        for (let i = 0; i < cache.length; i++) {
             console.log('cache: ' + cache[i][cache[i][0]]);
         }
     }
@@ -180,7 +178,7 @@ function submit() {
         if (num == 0) {
             return -1;
         }
-        var n = 0;
+        let n = 0;
         while (num > 1) {
             if (num % 2 == 0) {
                 num = num / 2;
@@ -194,7 +192,7 @@ function submit() {
     //function to convert a range input to a sequence of MM blocks
     function rangeInputSequence() {
         startingBlock = 0;
-        var i = 0;
+        let i = 0;
         if (input[0] != 0) {
             while (i < parseInt(input[0])) {
                 i += parseInt(blockSize);
@@ -211,13 +209,13 @@ function submit() {
     //function to modulo all the elements in the toProcess array by the number of blocks in the cache
     //and store the result in the inputSequence array
     function moduloInputSequence(toProcess) {
-        for (var i = 0; i < toProcess.length; i++) {
+        for (let i = 0; i < toProcess.length; i++) {
             inputSequence[i] = parseInt(toProcess[i]) % cmSize;
         }
     }
     //initialize cache by pushing 0 to the first element of each row in a function
     function initializeCache() {
-        for (var i = 0; i < cmSize; i++) {
+        for (let i = 0; i < cmSize; i++) {
             cache[i] = new Array(0);
             cache[i].push(0);
         }
@@ -226,8 +224,8 @@ function submit() {
     //input[1] = block 1 then inputSequence[1] = 1
     //Input^^^                cacheBlock^^^
     function simulateCache(processedInput) {
-        for (var i = 0; i < passes; i++) {
-            for (var j = 0; j < inputSequence.length; j++) {
+        for (let i = 0; i < passes; i++) {
+            for (let j = 0; j < inputSequence.length; j++) {
                 if (cache[inputSequence[j]][0] == 0) {
                     cache[inputSequence[j]].push(processedInput[j]);
                     cache[inputSequence[j]][0]++;
