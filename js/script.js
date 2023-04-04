@@ -28,11 +28,12 @@ function submit() {
 
     if (validInput == true) 
     {
-        if (MappingMode == 'Blocks') {
+        if (MappingMode == 'Blocks') 
+        {
             inputProcessed = input.split(',');
         }
-
-        if (MappingMode == 'Range') {
+        else if (MappingMode == 'Range') 
+        {
             input = input.split('-');
             rangeInputSequence();
         }
@@ -50,6 +51,21 @@ function submit() {
     //This function assigns the size type of the memory and cache to a letiable
     //This also calculates the number of bits needed for the Main Memory, tag, block, and word
     function fetchValidateData() {
+        // For error messages
+        const error = this.document.querySelector('.text-error');
+
+        // Fields
+        const error_block_size_field = this.document.querySelector('#blockSize');
+        const error_mm_size_field = this.document.querySelector('#mmSizeValue');
+        const error_cm_size_field = this.document.querySelector('#cmSizeValue');
+        const error_cm_access_time_field = this.document.querySelector('#cAccessTime');
+        const error_mm_access_time_field = this.document.querySelector('#mmAccessTime');
+        const error_input_sequence_field = this.document.querySelector('#inputSeqValues');
+        const error_passes_field = this.document.querySelector('#pass');
+
+        const error_mm_size_unit_field = this.document.querySelector('#mmSizeDropdown');
+        const error_cm_size_unit_field = this.document.querySelector('#cmSizeDropdown');
+
         blockSize = $('#blockSize').val();
         [mmSize, cmSize] = [$('#mmSizeValue').val(), $('#cmSizeValue').val()];
 
@@ -59,21 +75,20 @@ function submit() {
         }
         //Error message if the user enters an invalid Block Size: 0 or not a power of 2
         if (blockSize <= 0 || wordBits == -1) {
-            console.log('Please enter a valid Block Size');
+            showError(error, 'Please enter a valid Block Size', [error_block_size_field]);
             validInput = false;
         }
         mmSizeType = mmSelectedOption;
         //Main Memory is not needed when the mapping mode is Blocks or Range
         if (mmSelectedOption === 'Unit' && !(MappingMode == 'Blocks' || MappingMode == 'Range')) {
-            console.log('Please choose a size type for Main Memory');
+            showError(error, 'Please choose a size type for Main Memory', [error_mm_size_unit_field]);
             validInput = false;
-            //Error message if the user selects Unit for Main Memory
         }
         //Gets the type of CM Type
         cmSizeType = cmSelectedOption;
         // code to execute if "Unit" option is selected or if no option is selected
         if (cmSelectedOption === 'Unit') {
-            console.log('Please choose a size type for Cache Memory');
+            showError(error, 'Please choose a size type for Cache Memory', [error_cm_size_unit_field]);
             validInput = false;
         }
 
@@ -87,7 +102,7 @@ function submit() {
             }
             if (mmSize <= 0 || mmBits == -1) {
                 //Error message if the user enters an invalid Main Memory Size: 0 or not a power of 2
-                console.log('Please enter a valid Main Memory Size');
+                showError(error, 'Please enter a valid Main Memory Size', [error_mm_size_field]);
                 validInput = false;
             }
         }
@@ -102,26 +117,26 @@ function submit() {
 
         //Error message if the user enters an invalid Cache Memory Size: 0 or not a power of 2
         if (cmSize <= 0 || blockBits == -1) {
-            console.log('Please enter a valid Cache Memory Size');
+            showError(error, 'Please enter a valid Cache Memory Size', [error_cm_size_field]);
             validInput = false;
         }
         mainAT = document.getElementById('mmAccessTime').value;
         if (mainAT <= 0) {
             //Error message if the user enters an invalid Main Memory Access Time: 0 or less
-            console.log('Please enter a valid Main Memory Access Time');
+            showError(error, 'Please enter a valid Main Memory Access Time', [error_mm_access_time_field]);
             validInput = false;
         }
         cacheAT = document.getElementById('cAccessTime').value;
         if (cacheAT <= 0) {
             //Error message if the user enters an invalid Cache Memory Access Time: 0 or less
-            console.log('Please enter a valid Cache Memory Access Time');
+            showError(error, 'Please enter a valid Cache Memory Access Time', [error_cm_access_time_field]);
             validInput = false;
         }
         if (validInput == true) {
             tagBits = mmBits - (blockBits + wordBits);
             if (tagBits <= 0) {
                 //Error message if the user enters a Main Memory Size that is too small
-                console.log('Please enter valid Main Memory Size');
+                showError(error, 'Please enter a valid Main Memory Size', [error_mm_size_field]);
                 validInput = false;
             }
             missPenalty = 2 * cacheAT + blockSize * mainAT;
@@ -129,12 +144,13 @@ function submit() {
         passes = document.getElementById('pass').value;
         if (passes <= 0) {
             //Error message if the user enters an invalid number of passes: 0 or less
+            showError(error, 'Please enter a valid number of passes', [error_passes_field]);
             console.log('Please enter a valid number of passes');
             validInput = false;
         }
         //check if input is empty
         if (input.value == '') {
-            console.log('Please enter a valid input sequence');
+            showError(error, 'Please enter a valid input sequence', [error_input_sequence_field]);
             validInput = false;
         }
     }
