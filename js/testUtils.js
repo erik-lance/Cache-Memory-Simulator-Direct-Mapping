@@ -17,7 +17,9 @@ window.onload = function() {
 
     const passes_field = $("#pass");
 
-    probSet5();
+    // Uncomment the function you want to test
+    //probSet5();
+    probSet6();
 
     function probSet5() {
         cache_memory_size_field.val(4);
@@ -26,6 +28,24 @@ window.onload = function() {
         block_size_field.val(4);
         cache_access_time_field.val(1);
         main_memory_access_time_field.val(10);
+    }
+
+    function probSet6() {
+        block_size_field.val(2**6);
+
+        main_memory_size_field.val(2**20);
+        main_memory_size_unit_field.val("mmSizeWords");
+
+        cache_memory_size_field.val(2**12);
+        cache_memory_size_unit_field.val("cmSizeWords");
+
+        cache_access_time_field.val(1);
+        main_memory_access_time_field.val(10);
+
+        input_sequence_field.val("0-4351");
+        input_sequence_unit_field.val("Range");
+
+        passes_field.val(10);
     }
 
     console.log("Page loaded")
