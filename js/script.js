@@ -17,17 +17,14 @@ function submit() {
     let [mmSizeType, cmSizeType] = [];
 
     //Process Data
-    let mmBits;
-    let blockBits;
-    let wordBits;
+    let [mmBits, blockBits, wordBits] = [];
     let tagBits;
     let missPenalty;
     let inputSequence;
-    let hit = 0;
-    let miss = 0;
+    let [hit, miss] = [0, 0];
     let cache;
-    let averageAccessTime;
-    let totalAccessTime;
+    let [averageAccessTime, totalAccessTime] = [];
+    
     fetchValidateData();
     if (MappingMode == 'Blocks' && validInput == true) {
         inputProcessed = input.split(',');
@@ -52,26 +49,7 @@ function submit() {
     }
 
     if (validInput == true) {
-        console.log('mmSizeType: ' + mmSizeType);
-        console.log('cmSizeType: ' + cmSizeType);
-        console.log('blockSize: ' + blockSize);
-        console.log('mmSize: ' + mmSize);
-        console.log('cmSize: ' + cmSize);
-        console.log('mmBits: ' + mmBits);
-        console.log('tagBits: ' + tagBits);
-        console.log('blockBits: ' + blockBits);
-        console.log('wordBits: ' + wordBits);
-        console.log('missPenalty: ' + missPenalty);
-        console.log('inputSequence: ' + inputSequence);
-        console.log('input: ' + input);
-        //console log for testing with text to identify which value is which starting from SizeType
-        console.log('passes: ' + passes);
-        console.log('hit: ' + hit);
-        console.log('miss: ' + miss);
-        console.log('averageAccessTime: ' + averageAccessTime);
-        console.log('totalAccessTime: ' + totalAccessTime);
-        //console log cache in a 2D array as a table
-        console.table(cache);
+        printLogValues();
     }
 
     //This function assigns the size type of the memory and cache to a letiable
@@ -224,8 +202,10 @@ function submit() {
     //input[1] = block 1 then inputSequence[1] = 1
     //Input^^^                cacheBlock^^^
     function simulateCache(processedInput) {
-        for (let i = 0; i < passes; i++) {
-            for (let j = 0; j < inputSequence.length; j++) {
+        for (let i = 0; i < passes; i++) 
+        {
+            for (let j = 0; j < inputSequence.length; j++) 
+            {
                 if (cache[inputSequence[j]][0] == 0) {
                     cache[inputSequence[j]].push(processedInput[j]);
                     cache[inputSequence[j]][0]++;
@@ -252,5 +232,29 @@ function submit() {
         part1 = miss * (blockSize * miss1);
         totalMissTime = part1 + miss * cacheAT;
         totalAccessTime = totalHitTime + totalMissTime;
+    }
+
+    function printLogValues() {
+        console.log('mmSizeType: ' + mmSizeType);
+        console.log('cmSizeType: ' + cmSizeType);
+        console.log('blockSize: ' + blockSize);
+        console.log('mmSize: ' + mmSize);
+        console.log('cmSize: ' + cmSize);
+        console.log('mmBits: ' + mmBits);
+        console.log('tagBits: ' + tagBits);
+        console.log('blockBits: ' + blockBits);
+        console.log('wordBits: ' + wordBits);
+        console.log('missPenalty: ' + missPenalty);
+        console.log('inputSequence: ' + inputSequence);
+        console.log('input: ' + input);
+        //console log for testing with text to identify which value is which starting from SizeType
+        console.log('passes: ' + passes);
+        console.log('hit: ' + hit);
+        console.log('miss: ' + miss);
+        console.log('averageAccessTime: ' + averageAccessTime);
+        console.log('totalAccessTime: ' + totalAccessTime);
+        
+        //console log cache in a 2D array as a table
+        console.table(cache);
     }
 }
