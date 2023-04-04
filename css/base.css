@@ -1,7 +1,30 @@
 :root {
-    
+    --fast: all 0.2s ease;
 }
 
 body {
     background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+}
+
+.text-error{
+    opacity: 0;
+    visibility: hidden;
+    color: hsl(359, 85%, 71%);
+    font-weight: bold;
+    transition: var(--fast);
+    margin: 0;
+    text-align: center;
+}
+
+.text-error.active,
+.text-success.active{
+    opacity: 1;
+    visibility: visible;
+}
+
+input.error, 
+textarea.error, 
+select.error,
+.button-secondary.error{
+    border-color: hsl(359, 85%, 71%) !important;
 }
