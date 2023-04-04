@@ -17,9 +17,19 @@ window.onload = function() {
 
     const passes_field = $("#pass");
 
-    // Uncomment the function you want to test
-    //probSet5();
-    probSet6();
+    // Change test to probset number
+    let test = 5
+
+    switch (test) {
+        case 5:
+            probSet5();
+            break;
+        case 6:
+            probSet6();
+            break;
+        default:
+            break;
+    }
 
     function probSet5() {
         cache_memory_size_field.val(4);
@@ -28,6 +38,11 @@ window.onload = function() {
         block_size_field.val(4);
         cache_access_time_field.val(1);
         main_memory_access_time_field.val(10);
+
+        input_sequence_field.val("1,2,3,4,5,4,6,3");
+        input_sequence_unit_field.val("Blocks");
+
+        passes_field.val(1);
     }
 
     function probSet6() {
