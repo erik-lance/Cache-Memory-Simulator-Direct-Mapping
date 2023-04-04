@@ -25,29 +25,25 @@ function submit() {
     let [averageAccessTime, totalAccessTime] = [];
 
     fetchValidateData();
-    if (MappingMode == 'Blocks' && validInput == true) {
-        inputProcessed = input.split(',');
-        console.log('inputProcessed: ' + inputProcessed);
-        inputSequence = new Array(inputProcessed.length);
-        moduloInputSequence(inputProcessed);
-        cache = new Array(cmSize);
-        initializeCache();
-        simulateCache(inputProcessed);
-        computeAccessTimes();
-    }
-    if (MappingMode == 'Range' && validInput == true) {
-        input = input.split('-');
-        rangeInputSequence();
-        console.log('processedInput: ' + inputProcessed);
-        inputSequence = new Array(inputProcessed.length);
-        moduloInputSequence(inputProcessed);
-        cache = new Array(cmSize);
-        initializeCache();
-        simulateCache(inputProcessed);
-        computeAccessTimes();
-    }
 
-    if (validInput == true) {
+    if (validInput == true) 
+    {
+        if (MappingMode == 'Blocks') {
+            inputProcessed = input.split(',');
+        }
+
+        if (MappingMode == 'Range') {
+            input = input.split('-');
+            rangeInputSequence();
+        }
+
+        inputSequence = new Array(inputProcessed.length);
+        moduloInputSequence(inputProcessed);
+        cache = new Array(cmSize);
+        initializeCache();
+        simulateCache(inputProcessed);
+        computeAccessTimes();
+
         printLogValues();
     }
 
@@ -254,7 +250,7 @@ function submit() {
         console.log(`%c passes: %c${passes}`, "color: white", "color: white");
         console.log(`%c hit: %c${hit}`, "color: green", "color: white");
         console.log(`%c miss: %c${miss}`, "color: red", "color: white");
-        
+
         console.log(`%c averageAccessTime: %c${averageAccessTime}`, "color: cyan", "color: white");
         console.log(`%c totalAccessTime: %c${totalAccessTime}`, "color: cyan", "color: white");
 
