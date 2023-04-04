@@ -18,9 +18,12 @@ window.onload = function() {
     const passes_field = $("#pass");
 
     // Change test to probset number
-    let test = 5
+    let test = 1
 
     switch (test) {
+        case 1:
+            probset1();
+            break;
         case 5:
             probSet5();
             break;
@@ -29,6 +32,31 @@ window.onload = function() {
             break;
         default:
             break;
+    }
+
+    function probset1() {
+        block_size_field.val(128);
+
+        main_memory_size_field.val(2**12);
+        main_memory_size_unit_field.val("mmSizeBlocks");
+
+        cache_memory_size_field.val(2**6);
+        cache_memory_size_unit_field.val("cmSizeBlocks");
+
+        cache_access_time_field.val(1);
+        main_memory_access_time_field.val(10);
+
+        input_sequence_field.val("1000");
+        input_sequence_unit_field.val("Blocks");
+
+        passes_field.val(1);
+    }
+
+    function probset4() {
+        // Note: This is meant to be incomplete. The user should fill in the rest.
+
+        input_sequence_field.val("200,204,208,20C,2F4,2F0,200,204,218,21C,24C,2F4");
+        input_sequence_unit_field.val("Hex");
     }
 
     function probSet5() {
