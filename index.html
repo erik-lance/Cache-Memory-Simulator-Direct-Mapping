@@ -19,7 +19,7 @@
         	<div class="row">
 				<!--Simulation Card-->
     			<div class="col-sm-6">
-            		<div class="card">
+            		<div class="card h-100">
 						<h5 class="card-header text-center fs-3" style="background-color: #80d0c7">Specifications</h5>
 						<div class="card-body">
 						<!--Simulation Form-->
@@ -74,7 +74,7 @@
         		</div>
 				<!--Program Flow Card-->
         		<div class="col-sm-6">
-            		<div class="card">
+            		<div class="card h-100">
             		<h5 class="card-header text-center fs-3" style="background-color: #80d0c7">Program Flow</h5>
 						<div class="card-body">
 						<!--Program Flow Form-->
@@ -82,8 +82,17 @@
 							<!--Input Sequence-->
 							<div class="mb-3">
 								<label for="inputSeq" class="form-label fw-bold" style="color: #13547a">Input Sequence</label>
-								<input type="text" class="form-control" id="inputSeq" aria-describedby="inputSeqHelp">
-								<div id="inputSeqHelp" class="form-text">Enter Input Sequence separated by commas.</div>
+								<div class="input-group" id="inputSeq">
+								<input type="text" class="form-control" id="inputSeqValues" aria-describedby="inputSeqHelp">
+								<select class="form-select" id="inputSeqDropdown" aria-label="Unit for Input Sequence">
+									<option selected>Unit</option>
+									<option value="inputSeqBlocksAdd">Blocks</option>
+									<option value="inputSeqHexAdd">Hex</option>
+									<option value="inputSeqRangeAdd">Range</option>
+									<option value="inputSeqLoopAdd">Loop</option>
+								</select>
+								</div>
+								<div id="inputSeqHelp" class="form-text">Enter Input Sequence Addresses in Blocks, Hex, Range, or Loop.</div>
 							</div>
 							<!--Number of Pass-->
 							<div class="mb-3">
