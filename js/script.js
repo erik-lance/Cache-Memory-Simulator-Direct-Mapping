@@ -26,13 +26,13 @@ function submit() {
 
     fetchValidateData();
 
-    if (validInput == true) 
+    if (validInput == true)
     {
-        if (MappingMode == 'Blocks') 
+        if (MappingMode == 'Blocks')
         {
             inputProcessed = input.split(',');
         }
-        else if (MappingMode == 'Range') 
+        else if (MappingMode == 'Range')
         {
             input = input.split('-');
             rangeInputSequence();
@@ -46,6 +46,16 @@ function submit() {
         computeAccessTimes();
 
         printLogValues();
+
+        //scroll to the output
+        document.getElementById("output").classList.remove("d-none");
+
+        const targetElement = document.getElementById('out-div');
+        const targetOffsetTop = targetElement.offsetTop;
+
+        window.scrollTo({
+          top: targetOffsetTop,
+          behavior: 'smooth'});
     }
 
     //This function assigns the size type of the memory and cache to a letiable
@@ -160,7 +170,7 @@ function submit() {
             console.log('cache: ' + cache[i][cache[i][0]]);
         }
     }
-    
+
     //function to convert a range input to a sequence of MM blocks
     function rangeInputSequence() {
         startingBlock = 0;
@@ -196,9 +206,9 @@ function submit() {
     //input[1] = block 1 then inputSequence[1] = 1
     //Input^^^                cacheBlock^^^
     function simulateCache(processedInput) {
-        for (let i = 0; i < passes; i++) 
+        for (let i = 0; i < passes; i++)
         {
-            for (let j = 0; j < inputSequence.length; j++) 
+            for (let j = 0; j < inputSequence.length; j++)
             {
                 if (cache[inputSequence[j]][0] == 0) {
                     cache[inputSequence[j]].push(processedInput[j]);
@@ -253,10 +263,49 @@ function submit() {
         console.log(`%c averageAccessTime: %c${averageAccessTime}`, "color: cyan", "color: white");
         console.log(`%c totalAccessTime: %c${totalAccessTime}`, "color: cyan", "color: white");
 
+        outputhtml(hit, miss, missPenalty, averageAccessTime, totalAccessTime, cache);
+
         //console log cache in a 2D array as a table
         console.table(cache);
     }
 
+}
+
+// function that creates the html of the simulation output
+function outputhtml (hit, miss, missPenalty, averageAccessTime, totalAccessTime, cache) {
+  // Select the card-body element and assign it to a variable
+  const cardBody = document.querySelector('#out-body');
+  // Create a string that contains the desired HTML content
+  const html = `
+    <div id="values">
+    <p><span>Cache Hit:</span> ${hit}</p>
+    <p><span>Chache Miss:</span> ${miss}</p>
+    <p><span>Miss Penalty:</span> ${missPenalty}</p>
+    <p><span>Average Memory Access Time:</span> ${averageAccessTime} ns</p>
+    <p><span>Total Memory Access Time:</span> ${totalAccessTime} ns</p>
+    </div>
+  `;
+  // Update the card-body's innerHTML with the HTML content
+  cardBody.innerHTML = html;
+
+  const spanList = document.querySelectorAll('#values span');
+
+  spanList.forEach(span => {
+    span.classList.add("fw-bold");
+    span.style.color = "#13547a"; // change the color to red
+  });
+
+}
+
+// this function just removes the output and scrolls back to the top of the page
+// to allow the user to reinput neew values
+function reset() {
+  document.getElementById("output").classList.add("d-none");
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+  // will add code that resets form if needed
 }
 
 

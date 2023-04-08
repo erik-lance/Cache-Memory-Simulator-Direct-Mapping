@@ -22,9 +22,13 @@ body {
     visibility: visible;
 }
 
-input.error, 
-textarea.error, 
+input.error,
+textarea.error,
 select.error,
 .button-secondary.error{
     border-color: hsl(359, 85%, 71%) !important;
+}
+
+#values p {
+  line-height: 1;
 }

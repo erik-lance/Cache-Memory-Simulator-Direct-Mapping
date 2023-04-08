@@ -13,7 +13,7 @@
 
     <body>
 		<div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center">
-			<h3 class="fs3 pb-4">Cache Memory Simulator: Direct Mapping</h3>
+			<h3 class="fs3 pt-3 pb-4">Cache Memory Simulator: Direct Mapping</h3>
         	<div class="row">
 				<!--Simulation Card-->
     			<div class="col-sm-6">
@@ -107,6 +107,17 @@
 			<div class="d-grid pt-4 col-2">
 				<button type="submit" class="btn border" style="background-color: #80d0c7" onclick="submit()">Submit</button>
 			</div>
-    	</div>
+      <div class="d-grid pt-4 col-12 pb-4" id="out-div">
+        <div class="card h-100 d-none" id="output">
+          <h5 class="card-header text-center fs-3" style="background-color: #80d0c7">Direct Mapping Simulation</h5>
+          <div class="card-body" id="out-body">
+
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="button" class="btn border mb-2" style="background-color: #80d0c7; width: 200px" onclick="reset()">New Simulation</button>
+          </div>
+        </div>
+      </div>
+    </div>
     </body>
 </html>
