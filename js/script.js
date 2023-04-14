@@ -151,14 +151,16 @@ function submit() {
             validInput = false;
         }
 
+        //Converts the Main Memory Size to the number of bits
+        if (mmSize > 0) {
+            if (mmSizeType === 'mmSizeBlocks') {
+                mmSize = mmSize * blockSize;
+            }
+            mmBits = getBits(mmSize);
+        }
+
         //Main memory are not needed when the mapping mode is Blocks or Range
         if (MappingMode != 'Blocks' && MappingMode != 'Range') {
-            if (mmSize > 0) {
-                if (mmSizeType === 'mmSizeBlocks') {
-                    mmSize = mmSize * blockSize;
-                }
-                mmBits = getBits(mmSize);
-            }
             if (mmSize <= 0 || mmBits == -1) {
                 //Error message if the user enters an invalid Main Memory Size: 0 or not a power of 2
                 showError(error, 'Please enter a valid Main Memory Size', [error_mm_size_field]);

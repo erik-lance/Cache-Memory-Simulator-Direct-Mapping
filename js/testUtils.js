@@ -20,9 +20,12 @@ window.onload = function() {
     var formContainer = document.getElementById('loop-container');
 
     // Change test to probset number
-    let test = 7
+    let test = 0
 
     switch (test) {
+        case 0:
+            problem0();
+            break;
         case 1:
             probset1();
             break;
@@ -37,6 +40,24 @@ window.onload = function() {
             break;
         default:
             break;
+    }
+
+    function problem0() {
+        block_size_field.val(128);
+
+        main_memory_size_field.val(16);
+        main_memory_size_unit_field.val("mmSizeBlocks");
+
+        cache_memory_size_field.val(4);
+        cache_memory_size_unit_field.val("cmSizeBlocks");
+
+        main_memory_access_time_field.val(10);
+        cache_access_time_field.val(1);
+
+        input_sequence_field.val("0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15");
+        input_sequence_unit_field.val("Blocks");
+
+        passes_field.val(1);
     }
 
     function probset1() {
