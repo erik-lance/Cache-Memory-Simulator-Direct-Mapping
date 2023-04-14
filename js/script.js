@@ -397,45 +397,44 @@ function storeLoopValuesToArray() {
         // If the row is indented, count the number of consecutive indented rows below it (excluding current row)
         var consecutiveIndentedRows = 0;
         var nextRow = row.nextElementSibling;
-        console.log(nextRow)
+
         while (nextRow && nextRow.classList.contains('indent')) 
         {
             if (nextRow !== row) consecutiveIndentedRows++;
             nextRow = nextRow.nextElementSibling;
         }
 
-        console.log('consecutive: ')
-        console.log(consecutiveIndentedRows)
-
+        // Based on the number of loops of current row
         for (var x = 0; x < loopNumber; x++) 
         {
+            // Push current row values
             for (var j = startValue; j <= endValue; j++) 
             {
                 output.push(j);
-    
-                // For each indented row found under current row
-                for (var k = 0; k < consecutiveIndentedRows; k++) 
+            }
+
+            nextRow = row.nextElementSibling;
+
+            // For each indented row found under current row
+            for (var k = 0; k < consecutiveIndentedRows; k++) 
+            {
+                var indentedRange = nextRow.querySelector('.range').value;
+                var indentedLoopNumber = nextRow.querySelector('.loopNumber').value;
+
+                var indentedRangeValues = indentedRange.split('-');
+                var indentedStartValue = parseInt(indentedRangeValues[0]);
+                var indentedEndValue = parseInt(indentedRangeValues[1]);
+
+                // Push indented row values
+                for (var y = 0; y < indentedLoopNumber; y++)
                 {
-                    
-                    nextRow = row.nextElementSibling;
-                    var indentedRange = nextRow.querySelector('.range').value;
-                    var indentedLoopNumber = nextRow.querySelector('.loopNumber').value;
-    
-                    var indentedRangeValues = indentedRange.split('-');
-                    var indentedStartValue = parseInt(indentedRangeValues[0]);
-                    var indentedEndValue = parseInt(indentedRangeValues[1]);
-    
-                    // Push indented row values
-                    for (var y = 0; y < indentedLoopNumber; y++)
+                    for (var l = indentedStartValue; l <= indentedEndValue; l++)
                     {
-                        for (var l = indentedStartValue; l <= indentedEndValue; l++)
-                        {
-                            output.push(l);
-                        }
+                        output.push(l);
                     }
-                    // Move to next row
-                    nextRow = nextRow.nextElementSibling;
                 }
+                // Move to next row
+                nextRow = nextRow.nextElementSibling;
             }
         }
         
