@@ -39,10 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
             formContainer.removeChild(rows[rows.length - 1]);
         }
     });
-
-    document.getElementById('test-btn').addEventListener('click', function () {
-        console.log(storeLoopValuesToArray())
-    });
 });
 
 
@@ -85,6 +81,11 @@ function submit() {
             input = input.split('-');
             rangeInputSequence();
         }
+        else if (MappingMode == 'Multi-loop')
+        {
+            inputProcessed = storeLoopValuesToArray();
+            console.log(inputProcessed)
+        }
 
         inputSequence = new Array(inputProcessed.length);
         moduloInputSequence(inputProcessed);
@@ -102,8 +103,8 @@ function submit() {
         const targetOffsetTop = targetElement.offsetTop;
 
         window.scrollTo({
-          top: targetOffsetTop,
-          behavior: 'smooth'});
+            top: targetOffsetTop,
+            behavior: 'smooth'});
     }
 
     //This function assigns the size type of the memory and cache to a letiable
@@ -200,7 +201,7 @@ function submit() {
             missPenalty = 2 * cacheAT + blockSize * mainAT;
         }
         passes = document.getElementById('pass').value;
-        if (passes <= 0) {
+        if (MappingMode != "Multi-loop" && passes <= 0) {
             //Error message if the user enters an invalid number of passes: 0 or less
             showError(error, 'Please enter a valid number of passes', [error_passes_field]);
             console.log('Please enter a valid number of passes');
@@ -254,6 +255,7 @@ function submit() {
     //input[1] = block 1 then inputSequence[1] = 1
     //Input^^^                cacheBlock^^^
     function simulateCache(processedInput) {
+        if (MappingMode == "Multi-loop") passes = 1;
         for (let i = 0; i < passes; i++)
         {
             for (let j = 0; j < inputSequence.length; j++)
