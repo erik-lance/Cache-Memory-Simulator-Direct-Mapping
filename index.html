@@ -20,89 +20,106 @@
             		<div class="card h-100">
 						<h5 class="card-header text-center fs-3" style="background-color: #80d0c7">Specifications</h5>
 						<div class="card-body">
-						<!--Simulation Form-->
-						<form>
-							<!--Block Size-->
-							<div class="mb-3">
-								<label for="blockSize" class="form-label fw-bold" style="color: #13547a">Block Size</label>
-								<input type="number" min="0" class="form-control" id="blockSize" aria-describedby="blockSizeHelp">
-								<div id="blockSizeHelp" class="form-text">Enter Block Size in Words.</div>
-							</div>
-							<!--Main Memory Size-->
-							<div class="mb-3">
-								<label for="mmSize" class="form-label fw-bold" style="color: #13547a">Main Memory Size</label>
-								<div class="input-group" id="mmSize">
-									<input type="number" min="0" class="form-control" id="mmSizeValue" aria-describedby="mmSizeHelp">
-  								<select class="form-select" id="mmSizeDropdown" aria-label="Unit for mmSize">
+							<!--Simulation Form-->
+							<form>
+								<!--Block Size-->
+								<div class="mb-3">
+									<label for="blockSize" class="form-label fw-bold" style="color: #13547a">Block Size</label>
+									<input type="number" min="0" class="form-control" id="blockSize" aria-describedby="blockSizeHelp">
+									<div id="blockSizeHelp" class="form-text">Enter Block Size in Words.</div>
+								</div>
+								<!--Main Memory Size-->
+								<div class="mb-3">
+									<label for="mmSize" class="form-label fw-bold" style="color: #13547a">Main Memory Size</label>
+									<div class="input-group" id="mmSize">
+										<input type="number" min="0" class="form-control" id="mmSizeValue" aria-describedby="mmSizeHelp">
+									<select class="form-select" id="mmSizeDropdown" aria-label="Unit for mmSize">
+											<option selected>Unit</option>
+											<option value="mmSizeBlocks">Blocks</option>
+											<option value="mmSizeWords">Words</option>
+										</select>
+									</div>
+									<div id="mmSizeHelp" class="form-text">Enter Main Memory Size in Words or Blocks.</div>
+								</div>
+								<!--Cache Memory Size-->
+								<div class="mb-3">
+									<label for="cmSize" class="form-label fw-bold" style="color: #13547a">Cache Memory Size</label>
+									<div class="input-group" id="cmSize">
+									<input type="number" min="0" class="form-control" id="cmSizeValue" aria-describedby="cmSizeHelp">
+									<select class="form-select" id="cmSizeDropdown" aria-label="Unit for cmSize">
 										<option selected>Unit</option>
-										<option value="mmSizeBlocks">Blocks</option>
-										<option value="mmSizeWords">Words</option>
+										<option value="cmSizeBlocks">Blocks</option>
+										<option value="cmSizeWords">Words</option>
 									</select>
+									</div>
+									<div id="cmSizeHelp" class="form-text">Enter Cache Memory Size in Words or Blocks.</div>
 								</div>
-								<div id="mmSizeHelp" class="form-text">Enter Main Memory Size in Words or Blocks.</div>
-							</div>
-							<!--Cache Memory Size-->
-							<div class="mb-3">
-								<label for="cmSize" class="form-label fw-bold" style="color: #13547a">Cache Memory Size</label>
-								<div class="input-group" id="cmSize">
-								<input type="number" min="0" class="form-control" id="cmSizeValue" aria-describedby="cmSizeHelp">
-								<select class="form-select" id="cmSizeDropdown" aria-label="Unit for cmSize">
-									<option selected>Unit</option>
-									<option value="cmSizeBlocks">Blocks</option>
-									<option value="cmSizeWords">Words</option>
-								</select>
+								<!--Main Memory Access Time-->
+								<div class="mb-3">
+									<label for="mmAccessTime" class="form-label fw-bold" style="color: #13547a">Main Memory Access Time</label>
+									<input type="number" min="0" class="form-control" id="mmAccessTime" aria-describedby="mmAccessTimeHelp">
+									<div id="mmAccessTimeHelp" class="form-text">Enter Main Memory Access Time in ns.</div>
 								</div>
-								<div id="cmSizeHelp" class="form-text">Enter Cache Memory Size in Words or Blocks.</div>
-							</div>
-							<!--Main Memory Access Time-->
-							<div class="mb-3">
-								<label for="mmAccessTime" class="form-label fw-bold" style="color: #13547a">Main Memory Access Time</label>
-								<input type="number" min="0" class="form-control" id="mmAccessTime" aria-describedby="mmAccessTimeHelp">
-								<div id="mmAccessTimeHelp" class="form-text">Enter Main Memory Access Time in ns.</div>
-							</div>
-							<!--Cache Access Time-->
-							<div class="mb-3">
-								<label for="cAccessTime" class="form-label fw-bold" style="color: #13547a">Cache Access Time</label>
-								<input type="number" min="0" class="form-control" id="cAccessTime" aria-describedby="cAccessTimeHelp">
-								<div id="cAccessTimeHelp" class="form-text">Enter Cache Access Time in ns.</div>
-							</div>
-						</form>
+								<!--Cache Access Time-->
+								<div class="mb-3">
+									<label for="cAccessTime" class="form-label fw-bold" style="color: #13547a">Cache Access Time</label>
+									<input type="number" min="0" class="form-control" id="cAccessTime" aria-describedby="cAccessTimeHelp">
+									<div id="cAccessTimeHelp" class="form-text">Enter Cache Access Time in ns.</div>
+								</div>
+							</form>
 						</div>
 					</div>
         		</div>
+
 				<!--Program Flow Card-->
         		<div class="col-sm-6">
             		<div class="card h-100">
-            		<h5 class="card-header text-center fs-3" style="background-color: #80d0c7">Program Flow</h5>
+            			<h5 class="card-header text-center fs-3" style="background-color: #80d0c7">Program Flow</h5>
 						<div class="card-body">
-						<!--Program Flow Form-->
-						<form>
-							<!--Input Sequence-->
-							<div class="mb-3">
-								<label for="inputSeq" class="form-label fw-bold" style="color: #13547a">Input Sequence</label>
-								<div class="input-group" id="inputSeq">
-								<input type="text" class="form-control" id="inputSeqValues" aria-describedby="inputSeqHelp">
-								<select class="form-select" id="inputSeqDropdown" aria-label="Unit for Input Sequence">
-									<option selected>Unit</option>
-									<option value="Blocks">Blocks</option>
-									<option value="Hex">Hex</option>
-									<option value="Range">Range</option>
-									<option value="Loop">Loop</option>
-								</select>
+							<!--Program Flow Form-->
+							<form>
+								<!--Input Sequence-->
+								<div class="mb-3">
+									<label for="inputSeq" class="form-label fw-bold" style="color: #13547a">Input Sequence</label>
+									<div class="input-group" id="inputSeq">
+									<input type="text" class="form-control" id="inputSeqValues" aria-describedby="inputSeqHelp">
+									<select class="form-select" id="inputSeqDropdown" aria-label="Unit for Input Sequence">
+										<option selected>Unit</option>
+										<option value="Blocks">Blocks</option>
+										<option value="Hex">Hex</option>
+										<option value="Range">Range</option>
+										<option value="Loop">Loop</option>
+									</select>
+									</div>
+									<div id="inputSeqHelp" class="form-text">Enter Input Sequence Addresses in Blocks, Hex, Range, or Loop.</div>
 								</div>
-								<div id="inputSeqHelp" class="form-text">Enter Input Sequence Addresses in Blocks, Hex, Range, or Loop.</div>
-							</div>
-							<!--Number of Pass-->
-							<div class="mb-3">
-								<label for="pass" class="form-label fw-bold" style="color: #13547a">Pass</label>
-								<input type="number" min="0" class="form-control" id="pass" aria-describedby="passHelp">
-								<div id="passHelp" class="form-text">Enter number of Pass(es).</div>
-							</div>
-						</form>
+								<!--Number of Pass-->
+								<div class="mb-3">
+									<label for="pass" class="form-label fw-bold" style="color: #13547a">Pass</label>
+									<input type="number" min="0" class="form-control" id="pass" aria-describedby="passHelp">
+									<div id="passHelp" class="form-text">Enter number of Pass(es).</div>
+								</div>
+							</form>
 							<p class="text-error"></p>
 						</div>
         			</div>
         		</div>
+
+				<!-- Loop Card -->
+				<div class="col-sm-6">
+					<div class="card h-100">
+						<h5 class="card-header text-center fs-3" style="background-color: #80d0c7">Loop Flow</h5>
+						<div class="card-body">
+							<!-- Rows are inserted here -->
+							<div id="loop-container">
+
+							</div>
+							<button class="btn btn-primary mt-2" id="add-row-btn">Add Row</button>
+							<button class="btn btn-danger mt-2" id="delete-row-btn">Delete Row</button>
+						</div>
+					</div>
+				</div>
+				
         	</div>
 			<div class="d-grid pt-4 col-2">
 				<button type="submit" class="btn border" style="background-color: #80d0c7" onclick="submit()">Submit</button>

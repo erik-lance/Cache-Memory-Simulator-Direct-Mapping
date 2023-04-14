@@ -1,3 +1,31 @@
+document.addEventListener('DOMContentLoaded', function () {
+    // JavaScript code to handle dynamic row insertion
+    document.getElementById('add-row-btn').addEventListener('click', function () {
+        var formContainer = document.getElementById('loop-container');
+        var row = document.createElement('div');
+        row.className = 'row mt-2';
+        row.innerHTML = `
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Text Field">
+            </div>
+            <div class="col-md-6">
+                <input type="number" class="form-control" placeholder="Number Field">
+            </div>
+        `;
+        formContainer.appendChild(row);
+    });
+
+    // JavaScript code to handle dynamic row deletion
+    document.getElementById('delete-row-btn').addEventListener('click', function () {
+        var formContainer = document.getElementById('loop-container');
+        var rows = formContainer.getElementsByClassName('row');
+        if (rows.length > 0) {
+            formContainer.removeChild(rows[rows.length - 1]);
+        }
+    });
+});
+
+
 function submit() {
     //clear console log
     console.clear();
