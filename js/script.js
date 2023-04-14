@@ -6,25 +6,26 @@ document.addEventListener('DOMContentLoaded', function () {
         row.className = 'row mt-2';
         row.innerHTML = `
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Range Field">
+                <input type="text" class="form-control range" placeholder="Range Field">
             </div>
             <div class="col-md-4">
-                <input type="number" class="form-control" placeholder="Loops">
+                <input type="number" class="form-control loopNumber" placeholder="Loops">
             </div>
         `;
         formContainer.appendChild(row);
     });
 
+    // JavaScript code to handle dynamic row insertion with indentation
     document.getElementById('add-inside-loop-btn').addEventListener('click', function () {
         var formContainer = document.getElementById('loop-container');
         var row = document.createElement('div');
         row.className = 'row mt-2 indent'; // Add 'indent' class for indentation
         row.innerHTML = `
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Range Field">
+                <input type="text" class="form-contro range" placeholder="Range Field">
             </div>
             <div class="col-md-4">
-                <input type="number" class="form-control" placeholder="Loops">
+                <input type="number" class="form-control loopNumber" placeholder="Loops">
             </div>
         `;
         formContainer.appendChild(row);
@@ -37,6 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (rows.length > 0) {
             formContainer.removeChild(rows[rows.length - 1]);
         }
+    });
+
+    document.getElementById('test-btn').addEventListener('click', function () {
+        console.log(storeLoopValuesToArray())
     });
 });
 
@@ -369,4 +374,74 @@ function getBits(num) {
         }
     }
     return n;
+}
+
+
+function storeLoopValuesToArray() {
+    var loopContainer = document.getElementById('loop-container');
+    var rows = loopContainer.querySelectorAll('.row'); // Assuming the rows have a class name of 'row'
+    var output = [];
+
+    console.log(rows)
+    for (var i = 0; i < rows.length; i++) 
+    {
+        var row = rows[i];
+        var range = row.querySelector('.range').value;
+        var loopNumber = row.querySelector('.loopNumber').value;
+
+        // Split the range into start and end values
+        var rangeValues = range.split('-');
+        var startValue = parseInt(rangeValues[0]);
+        var endValue = parseInt(rangeValues[1]);
+
+        // If the row is indented, count the number of consecutive indented rows below it (excluding current row)
+        var consecutiveIndentedRows = 0;
+        var nextRow = row.nextElementSibling;
+        console.log(nextRow)
+        while (nextRow && nextRow.classList.contains('indent')) 
+        {
+            if (nextRow !== row) consecutiveIndentedRows++;
+            nextRow = nextRow.nextElementSibling;
+        }
+
+        console.log('consecutive: ')
+        console.log(consecutiveIndentedRows)
+
+        for (var x = 0; x < loopNumber; x++) 
+        {
+            for (var j = startValue; j <= endValue; j++) 
+            {
+                output.push(j);
+    
+                // For each indented row found under current row
+                for (var k = 0; k < consecutiveIndentedRows; k++) 
+                {
+                    
+                    nextRow = row.nextElementSibling;
+                    var indentedRange = nextRow.querySelector('.range').value;
+                    var indentedLoopNumber = nextRow.querySelector('.loopNumber').value;
+    
+                    var indentedRangeValues = indentedRange.split('-');
+                    var indentedStartValue = parseInt(indentedRangeValues[0]);
+                    var indentedEndValue = parseInt(indentedRangeValues[1]);
+    
+                    // Push indented row values
+                    for (var y = 0; y < indentedLoopNumber; y++)
+                    {
+                        for (var l = indentedStartValue; l <= indentedEndValue; l++)
+                        {
+                            output.push(l);
+                        }
+                    }
+                    // Move to next row
+                    nextRow = nextRow.nextElementSibling;
+                }
+            }
+        }
+        
+        // Skip indented rows
+        i += consecutiveIndentedRows;
+    }
+
+    return output;
 }
