@@ -6,10 +6,25 @@ document.addEventListener('DOMContentLoaded', function () {
         row.className = 'row mt-2';
         row.innerHTML = `
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Text Field">
+                <input type="text" class="form-control" placeholder="Range Field">
             </div>
+            <div class="col-md-4">
+                <input type="number" class="form-control" placeholder="Loops">
+            </div>
+        `;
+        formContainer.appendChild(row);
+    });
+
+    document.getElementById('add-inside-loop-btn').addEventListener('click', function () {
+        var formContainer = document.getElementById('loop-container');
+        var row = document.createElement('div');
+        row.className = 'row mt-2 indent'; // Add 'indent' class for indentation
+        row.innerHTML = `
             <div class="col-md-6">
-                <input type="number" class="form-control" placeholder="Number Field">
+                <input type="text" class="form-control" placeholder="Range Field">
+            </div>
+            <div class="col-md-4">
+                <input type="number" class="form-control" placeholder="Loops">
             </div>
         `;
         formContainer.appendChild(row);

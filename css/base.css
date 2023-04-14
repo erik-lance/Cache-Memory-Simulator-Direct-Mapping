@@ -32,3 +32,7 @@ select.error,
 #values p {
   line-height: 1;
 }
+
+.indent {
+    margin-left: 40px;
+}
