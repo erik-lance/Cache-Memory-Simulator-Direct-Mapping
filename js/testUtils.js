@@ -17,8 +17,10 @@ window.onload = function() {
 
     const passes_field = $("#pass");
 
+    var formContainer = document.getElementById('loop-container');
+
     // Change test to probset number
-    let test = 1
+    let test = 7
 
     switch (test) {
         case 1:
@@ -29,6 +31,9 @@ window.onload = function() {
             break;
         case 6:
             probSet6();
+            break;
+        case 7:
+            probSet7();
             break;
         default:
             break;
@@ -89,6 +94,55 @@ window.onload = function() {
         input_sequence_unit_field.val("Range");
 
         passes_field.val(10);
+    }
+
+    function probSet7() {
+        block_size_field.val(2**7);
+
+        main_memory_size_field.val(2**16);
+        main_memory_size_unit_field.val("mmSizeWords");
+
+        cache_memory_size_field.val(2**10);
+        cache_memory_size_unit_field.val("cmSizeWords");
+
+        cache_access_time_field.val(1);
+        main_memory_access_time_field.val(10);
+
+        input_sequence_unit_field.val("Multi-loop");
+
+        rowInserter("0-127", 1);
+        rowInserter("128-255", 10);
+        indentedRowInserter("256-511", 20);
+        indentedRowInserter("512-1279", 1);
+        rowInserter("1280-1535", 1);
+    }
+
+    function rowInserter(range, loops) {
+        var row = document.createElement('div');
+        row.className = 'row mt-2';
+        row.innerHTML = `
+            <div class="col-md-6">
+                <input type="text" class="form-control range" placeholder="Range Field" value=${range}>
+            </div>
+            <div class="col-md-4">
+                <input type="number" class="form-control loopNumber" placeholder="Loops" value =${loops}>
+            </div>
+        `;
+        formContainer.appendChild(row);
+    }
+
+    function indentedRowInserter(range, loops) {
+        var row = document.createElement('div');
+        row.className = 'row mt-2 indent'; // Add 'indent' class for indentation
+        row.innerHTML = `
+            <div class="col-md-6">
+                <input type="text" class="form-contro range" placeholder="Range Field" value=${range}>
+            </div>
+            <div class="col-md-4">
+                <input type="number" class="form-control loopNumber" placeholder="Loops" value=${loops}>
+            </div>
+        `;
+        formContainer.appendChild(row);
     }
 
     console.log("Page loaded")
