@@ -76,6 +76,16 @@ function submit() {
         {
             inputProcessed = input.split(',');
         }
+        else if (MappingMode == 'Hex')
+        {
+            inputProcessed = input.split(',');
+            
+            //converts the hex values to decimal
+            for (let i = 0; i < inputProcessed.length; i++)
+            {
+                inputProcessed[i] = parseInt(inputProcessed[i], 16);
+            }
+        }
         else if (MappingMode == 'Range')
         {
             input = input.split('-');
