@@ -319,7 +319,59 @@ function submit() {
 
         //console log cache in a 2D array as a table
         console.table(cache);
+
+        // Concatenate console logs into a single string
+        var logs = `mmSizeType: ${mmSizeType}\n` +
+        `cmSizeType: ${cmSizeType}\n` +
+        `blockSize: ${blockSize}\n` +
+        `mmSize: ${mmSize}\n` +
+        `cmSize: ${cmSize}\n` +
+        `mmBits: ${mmBits}\n` +
+        `tagBits: ${tagBits}\n` +
+        `blockBits: ${blockBits}\n` +
+        `wordBits: ${wordBits}\n` +
+        `missPenalty: ${missPenalty}\n` +
+        `inputSequence: ${inputSequence}\n` +
+        `input: ${input}\n` +
+        `passes: ${passes}\n` +
+        `hit: ${hit}\n` +
+        `miss: ${miss}\n` +
+        `averageAccessTime: ${averageAccessTime}\n` +
+        `totalAccessTime: ${totalAccessTime}\n` +
+        `cache:\n${JSON.stringify(cache)}\n`;
+
+        // Generate text file from console logs
+        var fileUrl = generateTextFile(logs);
+        var fileName = 'console_logs.txt';
+
+        // Trigger download of text file
+        downloadTextFile(fileUrl, fileName);
     }
+
+    // Function to generate text file from console logs
+    function generateTextFile(content) {
+        var textFile = null;
+        var data = new Blob([content], { type: 'text/plain' });
+
+        // If textFile exists, revoke its object URL to prevent memory leaks
+        if (textFile !== null) {
+        window.URL.revokeObjectURL(textFile);
+        }
+
+        // Create a new object URL for the text file
+        textFile = window.URL.createObjectURL(data);
+
+        return textFile;
+    }
+
+    // Function to download text file
+    function downloadTextFile(fileUrl, fileName) {
+        var downloadLink = document.createElement('a');
+        downloadLink.href = fileUrl;
+        downloadLink.download = fileName;
+        downloadLink.click();
+    }
+
 
 }
 

@@ -20,7 +20,7 @@ window.onload = function() {
     var formContainer = document.getElementById('loop-container');
 
     // Change test to probset number
-    let test = 0
+    let test = 7
 
     switch (test) {
         case 0:
