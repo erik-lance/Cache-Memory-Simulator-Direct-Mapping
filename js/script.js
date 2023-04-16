@@ -354,7 +354,7 @@ function submit() {
 
         var output_logs = `Cache Hit: ${hit}\n` +
         `Cache Miss: ${miss}\n` +
-        `Miss Penalty: ${missPenalty}\n` +
+        `Miss Penalty: ${missPenalty} ns\n` +
         `Average Memory Access Time: ${averageAccessTime} ns\n` +
         `Total Memory Access Time: ${totalAccessTime} ns\n\n`;
 
@@ -436,7 +436,7 @@ function outputhtml (hit, miss, missPenalty, averageAccessTime, totalAccessTime,
     <div id="values">
     <p><span>Cache Hit:</span> ${hit}</p>
     <p><span>Cache Miss:</span> ${miss}</p>
-    <p><span>Miss Penalty:</span> ${missPenalty}</p>
+    <p><span>Miss Penalty:</span> ${missPenalty} ns</p>
     <p><span>Average Memory Access Time:</span> ${averageAccessTime} ns</p>
     <p><span>Total Memory Access Time:</span> ${totalAccessTime} ns</p>
     </div>
@@ -471,8 +471,8 @@ function outputhtml (hit, miss, missPenalty, averageAccessTime, totalAccessTime,
   for (let i = 0; i < columns.length; i++) {
     const headerCell = document.createElement('th');
     headerCell.setAttribute('style', 'max-width: 7rem');
-    if (i == 2) {
-      headerCell.setAttribute('style', 'width: 5em');
+    if (i == 0) {
+      headerCell.setAttribute('id', 'writes');
     }
     headerCell.textContent = columns[i];
     headerRow.appendChild(headerCell);
@@ -500,7 +500,7 @@ function outputhtml (hit, miss, missPenalty, averageAccessTime, totalAccessTime,
           else if (j == 0) {
             var cell = document.createElement('td');
             cell.textContent = cache[i][j];
-            cell.setAttribute('style', 'width: 5em');
+            cell.setAttribute('style', 'width: 5px; ');
             row.appendChild(cell);
             var cell = document.createElement('td');
             cell.textContent = i;
