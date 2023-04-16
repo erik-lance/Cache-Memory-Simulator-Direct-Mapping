@@ -352,12 +352,53 @@ function submit() {
         `totalAccessTime: ${totalAccessTime}\n` +
         `cache:\n${JSON.stringify(cache)}\n`;
 
+        var output_logs = `Cache Hit: ${hit}\n` +
+        `Cache Hit: ${hit}\n` +
+        `Cache Miss: ${miss}\n` +
+        `Miss Penalty: ${missPenalty}\n` +
+        `Average Memory Access Time: ${averageAccessTime}\n` +
+        `Total Memory Access Time: ${totalAccessTime}\n\n`;
+
+        table_log = createTextFileContent();
+        var newContent = output_logs + table_log;
+
         // Generate text file from console logs
-        fileUrl = generateTextFile(logs);
-        fileName = 'console_logs.txt';
+        fileUrl = generateTextFile(newContent);
+        fileName = 'direct_mapping.txt';
 
         // Trigger download of text file
         //downloadTextFile(fileUrl, fileName);
+    }
+
+    function createTextFileContent () {
+      // Get the table element
+      const table = document.querySelector('#dm-table');
+
+      // Create a variable to hold the plain text content
+      let text = '';
+
+      // Iterate over each row of the table
+      for (let i = 0; i < table.rows.length; i++) {
+        // Iterate over each cell of the row
+        for (let j = 0; j < table.rows[i].cells.length; j++) {
+          // Add the cell content to the text variable, separated by a pipe symbol
+          const cell_text = table.rows[i].cells[j].textContent.trim();
+          if (i != 0){
+            text += cell_text + '\t\t ';
+          }
+          else {
+            text += cell_text + '\t ';
+          }
+          if (j < 2) {
+            text += '| '
+          }
+
+        }
+        // Add a line break at the end of the row
+        text += '\n';
+      }
+
+      return text
     }
 
     // Function to generate text file from console logs
@@ -418,6 +459,7 @@ function outputhtml (hit, miss, missPenalty, averageAccessTime, totalAccessTime,
   const simTable = document.querySelector('#sim-table');
   const table = document.createElement('table');
   table.classList.add("table", "table-bordered");
+  table.setAttribute("id","dm-table");
   table.style.border = '1px solid grey';
   table.style.width = '60%';
 
@@ -437,33 +479,41 @@ function outputhtml (hit, miss, missPenalty, averageAccessTime, totalAccessTime,
     headerRow.appendChild(headerCell);
     headerlen = i;
   }
-  for (let j = headerlen; j < maxHead; j++) {
-    const headerCell = document.createElement('th');
-    headerCell.textContent = "";
-    headerRow.appendChild(headerCell);
-  }
+  // for (let j = headerlen; j < maxHead; j++) {
+  //   const headerCell = document.createElement('th');
+  //   headerCell.textContent = "";
+  //   headerRow.appendChild(headerCell);
+  // }
   table.appendChild(headerRow);
 
   for (var i = 0; i < cache.length; i++) {
       var row = document.createElement('tr');
-      for (var j = 0; j < maxCol; j++) {
-          var cell = document.createElement('td');
+      for (var j = 0; j < cache[i].length; j++) {
+          if (j >= 1) {
+            if (j == 1) {
+              var cell = document.createElement('td');
+            }
+            cell.textContent = cache[i][j];
+            cell.setAttribute('style', 'width: 5em');
+            row.appendChild(cell);
+          }
           // Add index column to the second cell of each row
-          if (j == 1) {
-            cell.textContent = i+1;
-            cell.setAttribute('style', 'width: 5em; color: #13547a; font-weight: bold');
+          else if (j == 0) {
+            var cell = document.createElement('td');
+            cell.textContent = cache[i][j];
+            cell.setAttribute('style', 'width: 5em');
             row.appendChild(cell);
             var cell = document.createElement('td');
-            cell.setAttribute('style', 'width: 5em');
-            // cell.setAttribute('colspan', '2');
+            cell.textContent = i;
+            cell.setAttribute('style', 'width: 5em; color: #13547a; font-weight: bold');
+            row.appendChild(cell);
           }
-          cell.textContent = cache[i][j];
-          cell.setAttribute('style', 'width: 5em');
         row.appendChild(cell);
       }
       table.appendChild(row);
     }
     simTable.appendChild(table);
+    console.log("Table exists");
 }
 
 // this function just removes the output and scrolls back to the top of the page
