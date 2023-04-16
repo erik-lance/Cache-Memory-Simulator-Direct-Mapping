@@ -36,3 +36,17 @@ select.error,
 .indent {
     margin-left: 40px;
 }
+
+th {
+  background-color: #13547a;
+  color: white;
+}
+
+td, th {
+  padding-left: .5em;
+}
+
+#writes td{
+  /* background-color: #13547a; color: white; border: 0; */
+  max-width: 5em;
+}
