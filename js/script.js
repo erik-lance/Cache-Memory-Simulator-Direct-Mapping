@@ -510,6 +510,12 @@ function outputhtml (hit, miss, missPenalty, averageAccessTime, totalAccessTime,
           }
         row.appendChild(cell);
       }
+      if (cache[i].length == 1) {
+        var cell = document.createElement('td');
+        cell.textContent = 'Empty';
+        cell.setAttribute('style', 'width: 5em; color: grey;');
+        row.appendChild(cell);
+      }
       table.appendChild(row);
     }
     simTable.appendChild(table);
