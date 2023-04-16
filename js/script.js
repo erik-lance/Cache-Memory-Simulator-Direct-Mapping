@@ -41,6 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+var fileUrl;
+var fileName;
 
 function submit() {
     //clear console log
@@ -351,11 +353,11 @@ function submit() {
         `cache:\n${JSON.stringify(cache)}\n`;
 
         // Generate text file from console logs
-        var fileUrl = generateTextFile(logs);
-        var fileName = 'console_logs.txt';
+        fileUrl = generateTextFile(logs);
+        fileName = 'console_logs.txt';
 
         // Trigger download of text file
-        downloadTextFile(fileUrl, fileName);
+        //downloadTextFile(fileUrl, fileName);
     }
 
     // Function to generate text file from console logs
@@ -374,15 +376,15 @@ function submit() {
         return textFile;
     }
 
-    // Function to download text file
-    function downloadTextFile(fileUrl, fileName) {
-        var downloadLink = document.createElement('a');
-        downloadLink.href = fileUrl;
-        downloadLink.download = fileName;
-        downloadLink.click();
-    }
 
+}
 
+// Function to download text file
+function downloadTextFile() {
+    var downloadLink = document.createElement('a');
+    downloadLink.href = fileUrl;
+    downloadLink.download = fileName;
+    downloadLink.click();
 }
 
 // function that creates the html of the simulation output
