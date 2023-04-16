@@ -16,7 +16,7 @@
 			<h3 class="fs3 pt-3 pb-4">Cache Memory Simulator: Direct Mapping</h3>
         	<div class="row">
 				<!--Simulation Card-->
-    			<div class="col-sm-6">
+    			<div class="col-sm-4">
             		<div class="card h-100">
 						<h5 class="card-header text-center fs-3" style="background-color: #80d0c7">Specifications</h5>
 						<div class="card-body">
@@ -72,7 +72,7 @@
         		</div>
 
 				<!--Program Flow Card-->
-        		<div class="col-sm-6">
+        		<div class="col-sm-4">
             		<div class="card h-100">
             			<h5 class="card-header text-center fs-3" style="background-color: #80d0c7">Program Flow</h5>
 						<div class="card-body">
@@ -107,11 +107,13 @@
         		</div>
 
 				<!-- Loop Card -->
-				<div class="col-sm-6">
-					<div class="card h-100 my-4">
+				<div class="col-sm-4">
+					<div class="card h-100">
 						<h5 class="card-header text-center fs-3" style="background-color: #80d0c7">Loop Flow</h5>
-						<div id="inputSeqHelp" class="form-text">Enter Input Sequence in Loop. (e.g.) <br>0-127 1<br>128-255 1<br>256-511 3</div>
+
 						<div class="card-body">
+              <label for="inputSeq" class="form-label fw-bold" style="color: #13547a">Enter Input Sequence in Loop</label>
+  						<div id="inputSeqHelp" class="form-text ml-4">(e.g.) <br>0-127 1<br>128-255 1<br>256-511 3</div>
 							<!-- Rows are inserted here -->
 							<div id="loop-container">
 
@@ -119,11 +121,11 @@
 							<button class="btn btn-primary mt-2" id="add-row-btn">Add Row</button>
 							<button class="btn btn-success mt-2" id="add-inside-loop-btn">Add Inside Loop</button>
 							<button class="btn btn-danger mt-2" id="delete-row-btn">Delete Row</button>
-							
+
 						</div>
 					</div>
 				</div>
-				
+
         	</div>
 			<!--Submit Button-->
 			<div class="d-grid pt-4 mt-4 col-2">
