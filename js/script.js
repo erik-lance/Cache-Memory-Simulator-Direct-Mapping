@@ -268,6 +268,16 @@ function submit() {
     //Input^^^                cacheBlock^^^
     function simulateCache(processedInput) {
         if (MappingMode == "Multi-loop") passes = 1;
+
+        if (MappingMode == "Hex")
+        {
+            // Converts the decimal input back to hexadecimal
+            for (let i = 0; i < processedInput.length; i++)
+            {
+                processedInput[i] = processedInput[i].toString(16);
+            }
+        }
+
         for (let i = 0; i < passes; i++)
         {
             for (let j = 0; j < inputSequence.length; j++)
