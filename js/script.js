@@ -81,7 +81,7 @@ function submit() {
         else if (MappingMode == 'Hex')
         {
             inputProcessed = input.split(',');
-            
+
             //converts the hex values to decimal
             for (let i = 0; i < inputProcessed.length; i++)
             {
@@ -395,10 +395,13 @@ function outputhtml (hit, miss, missPenalty, averageAccessTime, totalAccessTime,
   const html = `
     <div id="values">
     <p><span>Cache Hit:</span> ${hit}</p>
-    <p><span>Chache Miss:</span> ${miss}</p>
+    <p><span>Cache Miss:</span> ${miss}</p>
     <p><span>Miss Penalty:</span> ${missPenalty}</p>
     <p><span>Average Memory Access Time:</span> ${averageAccessTime} ns</p>
     <p><span>Total Memory Access Time:</span> ${totalAccessTime} ns</p>
+    </div>
+    <div id="sim-table" class="px-2">
+
     </div>
   `;
   // Update the card-body's innerHTML with the HTML content
@@ -411,6 +414,56 @@ function outputhtml (hit, miss, missPenalty, averageAccessTime, totalAccessTime,
     span.style.color = "#13547a"; // change the color to red
   });
 
+  // output the table
+  const simTable = document.querySelector('#sim-table');
+  const table = document.createElement('table');
+  table.classList.add("table", "table-bordered");
+  table.style.border = '1px solid grey';
+  table.style.width = '60%';
+
+  const maxCol = 3;
+
+  const columns = ['# of Writes', 'Block', 'Data'];
+  const maxHead = cache.reduce((max, row) => Math.max(max, row.length), 0);
+  var headerlen = 0;
+  const headerRow = document.createElement('tr');
+  for (let i = 0; i < columns.length; i++) {
+    const headerCell = document.createElement('th');
+    headerCell.setAttribute('style', 'max-width: 7rem');
+    if (i == 2) {
+      headerCell.setAttribute('style', 'width: 5em');
+    }
+    headerCell.textContent = columns[i];
+    headerRow.appendChild(headerCell);
+    headerlen = i;
+  }
+  for (let j = headerlen; j < maxHead; j++) {
+    const headerCell = document.createElement('th');
+    headerCell.textContent = "";
+    headerRow.appendChild(headerCell);
+  }
+  table.appendChild(headerRow);
+
+  for (var i = 0; i < cache.length; i++) {
+      var row = document.createElement('tr');
+      for (var j = 0; j < maxCol; j++) {
+          var cell = document.createElement('td');
+          // Add index column to the second cell of each row
+          if (j == 1) {
+            cell.textContent = i+1;
+            cell.setAttribute('style', 'width: 5em; color: #13547a; font-weight: bold');
+            row.appendChild(cell);
+            var cell = document.createElement('td');
+            cell.setAttribute('style', 'width: 5em');
+            // cell.setAttribute('colspan', '2');
+          }
+          cell.textContent = cache[i][j];
+          cell.setAttribute('style', 'width: 5em');
+        row.appendChild(cell);
+      }
+      table.appendChild(row);
+    }
+    simTable.appendChild(table);
 }
 
 // this function just removes the output and scrolls back to the top of the page
@@ -451,7 +504,7 @@ function storeLoopValuesToArray() {
     var output = [];
 
     console.log(rows)
-    for (var i = 0; i < rows.length; i++) 
+    for (var i = 0; i < rows.length; i++)
     {
         var row = rows[i];
         var range = row.querySelector('.range').value;
@@ -466,17 +519,17 @@ function storeLoopValuesToArray() {
         var consecutiveIndentedRows = 0;
         var nextRow = row.nextElementSibling;
 
-        while (nextRow && nextRow.classList.contains('indent')) 
+        while (nextRow && nextRow.classList.contains('indent'))
         {
             if (nextRow !== row) consecutiveIndentedRows++;
             nextRow = nextRow.nextElementSibling;
         }
 
         // Based on the number of loops of current row
-        for (var x = 0; x < loopNumber; x++) 
+        for (var x = 0; x < loopNumber; x++)
         {
             // Push current row values
-            for (var j = startValue; j <= endValue; j++) 
+            for (var j = startValue; j <= endValue; j++)
             {
                 output.push(j);
             }
@@ -484,7 +537,7 @@ function storeLoopValuesToArray() {
             nextRow = row.nextElementSibling;
 
             // For each indented row found under current row
-            for (var k = 0; k < consecutiveIndentedRows; k++) 
+            for (var k = 0; k < consecutiveIndentedRows; k++)
             {
                 var indentedRange = nextRow.querySelector('.range').value;
                 var indentedLoopNumber = nextRow.querySelector('.loopNumber').value;
@@ -505,7 +558,7 @@ function storeLoopValuesToArray() {
                 nextRow = nextRow.nextElementSibling;
             }
         }
-        
+
         // Skip indented rows
         i += consecutiveIndentedRows;
     }

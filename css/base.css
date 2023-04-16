@@ -36,3 +36,8 @@ select.error,
 .indent {
     margin-left: 40px;
 }
+
+th {
+  background-color: #13547a;
+  color: white;
+}
