@@ -353,11 +353,10 @@ function submit() {
         `cache:\n${JSON.stringify(cache)}\n`;
 
         var output_logs = `Cache Hit: ${hit}\n` +
-        `Cache Hit: ${hit}\n` +
         `Cache Miss: ${miss}\n` +
         `Miss Penalty: ${missPenalty}\n` +
-        `Average Memory Access Time: ${averageAccessTime}\n` +
-        `Total Memory Access Time: ${totalAccessTime}\n\n`;
+        `Average Memory Access Time: ${averageAccessTime} ns\n` +
+        `Total Memory Access Time: ${totalAccessTime} ns\n\n`;
 
         table_log = createTextFileContent();
         var newContent = output_logs + table_log;
